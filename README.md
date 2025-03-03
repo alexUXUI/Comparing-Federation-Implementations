@@ -396,6 +396,10 @@ Both Module Federation and Native Federation implementations continue to evolve,
 
 ## Conclusion
 
+<details>
+
+<summary>Conclusion</summary>
+
 While there is no one-size-fits-all solution, Module Federation's container-based architecture and plugin system provide a flexible and extensible runtime management system, while Native Federation's integration with standard ES modules provides a familiar and familiar user experience. For performance and extensibility Module Federation is preferred. For quite simple projects, and adherence to standards, Native Federation is preferred.
 
 ## Comprehensive Comparison Across all Layers
@@ -413,6 +417,8 @@ Below is a summary table, showing the tables from the previous sections.
 | **Management Layer** |||||
 | | Runtime Control | - Fine-grained loading control<br>- Advanced lifecycle management<br>- Flexible module graph control | - Basic loading mechanisms<br>- Limited lifecycle control<br>- Static module relationships |
 | | Runtime Extension | - Rich plugin ecosystem<br>- Custom feature development<br>- Scalable team workflows<br>- Senior developer focus | - Limited extensibility<br>- Basic feature set<br>- Suitable for smaller teams<br>- Junior developer friendly |
+
+</details>
 
 <details>
 
