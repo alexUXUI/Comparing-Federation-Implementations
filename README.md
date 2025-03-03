@@ -188,15 +188,11 @@ Module Federation offers multiple share scopes with granular control over depend
    - Ability to modify share scope configuration after initialization
    - Support for multiple independent share scopes
 
-2. **State Management**
-   - Scope-specific state isolation
-   - Singleton management across micro-frontends
-   - Versioned state containers
-
-3. **Dependency Isolation**
+2. **Dependency Isolation**
    - Separate share scopes for different parts of the application
    - Version conflict resolution within each scope
    - Independent upgrade paths for shared dependencies
+   - Singleton management across micro-frontends
 
 Native Federation, in contrast, relies on the browser's global module system, which means:
 
