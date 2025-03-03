@@ -62,9 +62,9 @@ For the purposes of this document, the concept of Federation is organized into t
 
 Each layer consists of steps, which define the key processes within that layer.
 
-Each step is measured by a set of attributes, which serve as meaningful points of comparison across different implementations of the same step.
+Each step is measured by a set of Properties, which serve as meaningful points of comparison across different implementations of the same step.
 
-In the following section, we will examine each layer in detail, breaking down its steps and analyzing their defining attributes to provide a structured comparison of Module Federation and Native Federation.
+In the following section, we will examine each layer in detail, breaking down its steps and analyzing their defining Properties to provide a structured comparison of Module Federation and Native Federation.
 
 </details>
 
@@ -81,21 +81,21 @@ The Code Resolution Layer is the first step in the federation process, where the
 
 ### 1.a) Runtime Initialization Step
 
-Runtime initialization step is measured by along the following attributes:
+Runtime initialization step is measured by along the following Properties:
 
 - Configurability: The options for configuring the runtime
 - Independence: Independent runtime support
 
-| Initialization Step Attributes               | Native Federation     | Module Federation |
+| Initialization Step Properties               | Native Federation     | Module Federation |
 | --------------------- | --------------------- | ----------------- |
 | Configurability | ❌ No support for runtime share scope configuration | ✅ can configure shared deps at runtime |
 | Independence | ❌ No support for independent runtimes (by default) | ✅ supports independent runtimes |
 
-#### Configurability Attribute
+#### Configurability Property
 
 Module Federation [init](https://module-federation.io/guide/basic/runtime.html#init) enables runtime share scope configuration, which supports use cases where the share scope is used to share singletons, and stateful services, across multiple MFE instances.
 
-#### Independence Attribute
+#### Independence Property
 
 Native Federation's use of import maps requires all remotes to be defined in the host. This introduces tight-coupling between MFEs where the shell must load all child remote on behalf of all consumers.
 
@@ -107,11 +107,11 @@ For Example: With module federation Products like Thread are free to independent
 
 > Native Federation uses browser-native Import Maps to resolve and load modules directly through ES Module imports. Module Federation uses a Container API pattern where modules are loaded through a JSON manifest and webpack's container runtime which creates a virtual module system for resolving remote assets. These approaches have differences in terms of the runtime execution of the program.
 
-Code Resolution is measured by along the following attributes:
+Code Resolution is measured by along the following Properties:
 
 - Initial load performance: Network calls, Render blocking resources, LCP, CPU throttle
 
-| Resolution Step Attributes               | Native Federation     | Module Federation |
+| Resolution Step Properties               | Native Federation     | Module Federation |
 | --------------------- | --------------------- | ----------------- |
 | Initial load Performance | ❌ | ✅ |
 | # Network calls | 19 | 11 |
@@ -123,7 +123,7 @@ Code Resolution is measured by along the following attributes:
 | LCP CPU throttle 20x | 0.89s | 0.49s |
 | Runtime init | 24.861083984375 ms | 18.72900390625 ms |
 
-#### Initial Load Performance Attribute
+#### Initial Load Performance Property
 
 There are more network requests for Native Federation systems meaning that the worse the network, the worse the performance of Native Federation.
 
@@ -162,23 +162,23 @@ The Integration Layer handles how federated remotes integrate with the consumer'
 
 ### 2.a) Dependency Resolution Step
 
-Dependency Resolution step is measured by the following attributes:
+Dependency Resolution step is measured by the following Properties:
 
 - Version Management: How dependencies and their versions are managed
 - Sharing Strategy: How shared dependencies are handled across modules
 
-| Dependency Resolution Attributes               | Native Federation     | Module Federation |
+| Dependency Resolution Properties               | Native Federation     | Module Federation |
 | --------------------- | --------------------- | ----------------- |
 | Version Management | ✅ Supports dependency sharing through Import Maps | ✅ Supports semver ranges |
 | Sharing Strategy | ✅ Configurable at build time | ✅ Configurable sharing strategies |
 
-#### Version Management Attribute
+#### Version Management Property
 
 Native Federation uses Import Maps and EcmaScript modules to manage shared dependencies. It provides the `shareAll` helper that can share all dependencies found in package.json, with options for singleton management and version control. While it requires more precise version matching, it embraces emerging browser standards for module resolution.
 
 Module Federation uses a container-based architecture that enables flexible version resolution through semver ranges, providing more flexibility in version management.
 
-#### Sharing Strategy Attribute
+#### Sharing Strategy Property
 
 Native Federation provides a straightforward sharing strategy through the `shareAll` helper with configurable options: `singleton`, `strictVersion`, `requiredVersion`, `includeSecondaries`, and `skip`
 
@@ -186,27 +186,27 @@ Module Federation offers similar capabilities through its container-based archit
 
 ### 2.b) Module Integration Step
 
-Module Integration step is measured by the following attributes:
+Module Integration step is measured by the following Properties:
 
 - Initialization Control: Level of control over module initialization
 - Scope Isolation: How module boundaries and scopes are managed
 - Error Handling: How module loading errors are managed
 
-| Module Integration Attributes               | Native Federation     | Module Federation |
+| Module Integration Properties               | Native Federation     | Module Federation |
 | --------------------- | --------------------- | ----------------- |
 | Initialization Control | ❌ Standard ESM initialization | ✅ Container initialization API |
 | Scope Isolation | ❌ Basic ES Module scoping | ✅ Enhanced container isolation |
 | Error Handling | ❌ Manual error handling | ✅ Built-in error handling |
 
-#### Initialization Control Attribute
+#### Initialization Control Property
 
 Module Federation's container initialization API offers fine-grained control over module loading and initialization, while Native Federation uses standard ESM initialization.
 
-#### Scope Isolation Attribute
+#### Scope Isolation Property
 
 Module Federation provides enhanced container isolation through its container-based architecture, while Native Federation relies on basic ES Module scoping.
 
-#### Error Handling Attribute
+#### Error Handling Property
 
 Module Federation's container abstraction provides built-in error handling for module loading and dependency conflicts, while Native Federation's integration with standard ES modules means error handling must be managed manually.
 
@@ -243,47 +243,47 @@ The Runtime Management Layer handles how federated services are managed during e
 
 ### 3.a) Runtime Control Step
 
-Runtime Control step is measured by the following attributes:
+Runtime Control step is measured by the following Properties:
 
 - Module Loading: How modules are loaded and initialized
 - Lifecycle Management: How module lifecycles are managed
 - Module Graph Management: How the module graph is updated during runtime
 
-| Runtime Control Attributes               | Native Federation     | Module Federation |
+| Runtime Control Properties               | Native Federation     | Module Federation |
 | --------------------- | --------------------- | ----------------- |
 | Module Loading | ❌ Limited control | ✅ Programmatic control |
 | Lifecycle Management | ❌ Basic ESM lifecycle | ✅ Full lifecycle control |
 | Module Graph Management | ✅ Basic support | ✅ Advanced control |
 
-#### Module Loading Attribute
+#### Module Loading Property
 
 Module Federation provides programmatic control over module loading through its container API, allowing fine-grained control over how and when modules are loaded. Native Federation relies on the browser's built-in module loading system, offering less control.
 
-#### Lifecycle Management Attribute
+#### Lifecycle Management Property
 
 Module Federation enables full control over module initialization and cleanup through its container architecture. Native Federation uses standard ESM lifecycle management with limited control options.
 
 ### 3.b) Runtime Extension Step
 
-Runtime Extension step is measured by the following attributes:
+Runtime Extension step is measured by the following Properties:
 
 - Plugin Support: Ability to extend runtime behavior through plugins
 - Error Handling: Customization of error recovery and handling
 - Monitoring Capabilities: Support for logging and performance tracking
 - Security Controls: Implementation of access control and license enforcement
 
-| Runtime Extension Attributes | Native Federation | Module Federation |
+| Runtime Extension Properties | Native Federation | Module Federation |
 |--|--|--|
 | Plugin Support | ❌ No plugin system | ✅ Extensible plugin system |
 | Security Controls | ❌ Manual implementation required | ✅ Plugin-based security framework |
 | Error Handling | ❌ Manual error handling | ✅ Built-in recovery mechanisms |
 | Monitoring Capabilities | ❌ Limited monitoring | ✅ Comprehensive monitoring |
 
-#### Plugin Support Attribute
+#### Plugin Support Property
 
 Module Federation's runtime is extensible through a plugin system that enables. Native Federation's integration with standard ES modules means error handling must be managed manually.
 
-#### Security Controls Attribute
+#### Security Controls Property
 
 Module Federation's plugin architecture significantly reduces the effort required to implement:
 
@@ -292,7 +292,7 @@ Module Federation's plugin architecture significantly reduces the effort require
 - **Usage Tracking**: Automated monitoring of module consumption for license compliance
 - **Security Policies**: Centralized implementation of security rules across all federated modules
 
-#### Error Handling Attribute
+#### Error Handling Property
 
 Module Federation's runtime provides built-in error recovery mechanisms for:
 
@@ -301,7 +301,7 @@ Module Federation's runtime provides built-in error recovery mechanisms for:
 
 Native Federation's integration with standard ES modules means error handling must be managed manually.
 
-#### Monitoring Capabilities Attribute
+#### Monitoring Capabilities Property
 
 Module Federation provides comprehensive logging and monitoring hooks for tracking:
 
