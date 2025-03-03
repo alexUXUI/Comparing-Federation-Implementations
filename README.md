@@ -60,8 +60,8 @@ To provide a structured comparison, we will analyze both approaches using the Fe
 
 Federation consists of three layers: Resolution, Integration, and Management.
 
-- **Layers** contain steps defining key processes.
-- **Steps** are measured by properties that provide meaningful comparisons between implementations.
+- **Layers** represent the logically distinct phases of the concept of Federation. Each layer contains steps defining key processes within the layer.
+- **Steps** describe the granular happenings within each layer. Steps are measured by properties that provide meaningful comparisons between implementations.
 - **Properties** define key characteristics of each step and provide objective comparison criteria.
 
 The following sections analyze each layer, breaking down steps and properties to compare Module Federation and Native Federation.
@@ -76,8 +76,8 @@ The following sections analyze each layer, breaking down steps and properties to
 
 The Resolution Layer is the first step in federation, where code is resolved and loaded into the consumer's runtime. It consists of:
 
-1.a) Runtime initialization: Configuring the runtime environment
-1.b) Code Resolution: Loading remote modules into the consumer runtime
+- 1.a) Runtime initialization: Configuring the runtime environment
+- 1.b) Code Resolution: Loading remote modules into the consumer runtime
 
 ### 1.a) Runtime Initialization Step
 
@@ -86,9 +86,9 @@ Measured by:
 - Configurability: The options for configuring the runtime
 - Independence: Independent runtime support
 
-| Initialization Step Properties               | Native Federation     | Module Federation |
+| Properties               | Native Federation     | Module Federation |
 | --------------------- | --------------------- | ----------------- |
-| Configurability | ❌ No support for runtime share scope configuration | ✅ can configure shared deps at runtime |
+| Configurability | ❌ No support for runtime share scope configuration. Smaller API. | ✅ can configure shared deps at runtime. Broader API. |
 | Independence | ❌ No support for independent runtimes (by default) | ✅ supports independent runtimes |
 
 #### Configurability Property
@@ -142,10 +142,10 @@ The technical differences in the Resolution Layer translate into business  impac
 
 Handles how federated remotes integrate into the consumer runtime.
 
-Measured by:
+It consists of the following steps:
 
-- **Version Management**: Dependency version handling
-- **Sharing Strategy**: Shared dependency handling
+- 2.a) Dependency Resolution: Managing dependencies and their versions
+- 2.b) Module Integration: Loading and initializing federated modules
 
 ### 2.a) Dependency Resolution Step
 
@@ -178,7 +178,7 @@ Module Integration step is measured by the following Properties:
 - **Initialization Control**: Control over module initialization
 - **Scope Isolation**: Module boundary management
 
-| Module Integration Properties               | Native Federation     | Module Federation |
+| Property               | Native Federation     | Module Federation |
 | --------------------- | --------------------- | ----------------- |
 | Initialization Control | ❌ Standard ESM initialization | ✅ Container initialization API |
 | Scope Isolation | ❌ Basic ES Module scoping | ✅ Enhanced container isolation |
@@ -219,10 +219,10 @@ The Integration Layer capabilities translate into significant implications for d
 
 Handles runtime execution management.
 
-Measured by:
+Consists of the following steps:
 
-3.a) Runtime Control: Managing and controlling the loading, access, and execution of federated dependencies
-3.b) Runtime Extension: Extending the runtime with plugins and custom behaviors
+- 3.a) Runtime Control: Managing and controlling the loading, access, and execution of federated dependencies
+- 3.b) Runtime Extension: Extending the runtime with plugins and custom behaviors
 
 ### 3.a) Runtime Control Step
 
@@ -232,7 +232,7 @@ Runtime Control step is measured by the following Properties:
 - Lifecycle Management: How module lifecycles are managed
 - Module Graph Management: How the module graph is updated during runtime
 
-| Runtime Control Properties               | Native Federation     | Module Federation |
+| Property               | Native Federation     | Module Federation |
 | --------------------- | --------------------- | ----------------- |
 | Module Loading | ❌ Limited control | ✅ Programmatic control |
 | Lifecycle Management | ❌ Basic ESM lifecycle | ✅ Full lifecycle control |
@@ -255,7 +255,7 @@ Runtime Extension step is measured by the following Properties:
 - Monitoring Capabilities: Support for logging and performance tracking
 - Security Controls: Implementation of access control and license enforcement
 
-| Runtime Extension Properties | Native Federation | Module Federation |
+| Property | Native Federation | Module Federation |
 |--|--|--|
 | Plugin Support | ❌ No plugin system | ✅ Extensible plugin system |
 | Security Controls | ❌ Manual implementation required | ✅ Plugin-based security framework |
@@ -318,7 +318,7 @@ The technical capabilities of the Runtime Management Layer translate into signif
 
 ### High-Level Summary on Differences
 
-Module Federation and Native Federation represent fundamentally different approaches to code federation:
+Module Federation and Native Federation represent quite similar mental models, but they are fundamentally different implementation to code federation:
 
 - **Architecture**: Module Federation uses a container-based architecture with a virtual module system, while Native Federation leverages browser-native ES Modules and Import Maps.
 
