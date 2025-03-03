@@ -242,16 +242,20 @@ Runtime Control step is measured by the following Properties:
 | Property               | Native Federation     | Module Federation |
 | --------------------- | --------------------- | ----------------- |
 | Module Loading | Limited control | Programmatic control |
-| Lifecycle Management | Basic ESM lifecycle | Full lifecycle control |
-| Module Graph Management | Basic support | Advanced control |
+| Lifecycle Management | Native ESM lifecycle | Full lifecycle control |
+| Module Graph Management | Limited support | Advanced control |
 
 #### Module Loading
 
-Module Federation provides programmatic control over module loading through its container API, allowing fine-grained control over how and when modules are loaded. Native Federation relies on the browser's built-in module loading system, offering less control.
+Module Federation provides programmatic control over module loading through its container API with support for [preloading](https://module-federation.io/guide/basic/runtime.html#preloadremote), allowing fine-grained control over how and when modules are loaded. Native Federation relies on the browser's built-in module loading system, offering less control.
 
 #### Lifecycle Management
 
-Module Federation enables full control over module initialization and cleanup through its container architecture. Native Federation uses standard ESM lifecycle management with limited control options.
+Module Federation enables full control over module initialization and cleanup through its plugin-based runtime architecture. Native Federation uses standard ESM lifecycle management with limited control options. There is no standard lifecycle management in Native Federation.
+
+#### Module Graph Management
+
+Native federation cannot update the import map, rather it must create a new one. Module federation has sophisticated methods for [registering](through its container architecture) new remotes, as well as registering new [shared](https://module-federation.io/guide/basic/runtime.html#loadshare) dependencies.
 
 ### 3.b) Runtime Extension Step
 
@@ -264,14 +268,14 @@ Runtime Extension step is measured by the following Properties:
 
 | Property | Native Federation | Module Federation |
 |--|--|--|
-| Plugin Support | No plugin system | Extensible plugin system |
+| Plugin Support | No plugin system | Extensible [plugin](https://module-federation.io/plugin/dev/index.html) system |
 | Security Controls | Manual implementation required | Plugin-based security framework |
 | Error Handling | Manual error handling | Built-in recovery mechanisms |
 | Monitoring Capabilities | Limited monitoring | Comprehensive monitoring |
 
 #### Plugin Support
 
-Module Federation's runtime is extensible through a plugin system that enables. Native Federation's integration with standard ES modules means error handling must be managed manually.
+Module Federation's runtime is extensible through a [plugin](https://module-federation.io/guide/basic/runtime.html#registerplugins) system that enables a wide-variety of use cases. Native Federation's integration with standard ES modules means error handling must be managed manually, putting the developer in charge of supporting runtime use cases.
 
 #### Security Controls
 
