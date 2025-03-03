@@ -86,7 +86,7 @@ Runtime initialization step is measured by along the following attributes:
 - Configurability: The options for configuring the runtime
 - Independence: Independent runtime support
 
-| Feature               | Native Federation     | Module Federation |
+| Initialization Step Attributes               | Native Federation     | Module Federation |
 | --------------------- | --------------------- | ----------------- |
 | Configurability | ❌ No support for runtime share scope configuration | ✅ can configure shared deps at runtime |
 | Independence | ❌ No support for independent runtimes (by default) | ✅ supports independent runtimes |
@@ -111,7 +111,7 @@ Code Resolution is measured by along the following attributes:
 
 - Initial load performance: Network calls, Render blocking resources, LCP, CPU throttle
 
-| Feature               | Native Federation     | Module Federation |
+| Resolution Step Attributes               | Native Federation     | Module Federation |
 | --------------------- | --------------------- | ----------------- |
 | Initial load Performance | ❌ | ✅ |
 | # Network calls | 19 | 11 |
@@ -167,7 +167,7 @@ Dependency Resolution step is measured by the following attributes:
 - Version Management: How dependencies and their versions are managed
 - Sharing Strategy: How shared dependencies are handled across modules
 
-| Feature               | Native Federation     | Module Federation |
+| Dependency Resolution Attributes               | Native Federation     | Module Federation |
 | --------------------- | --------------------- | ----------------- |
 | Version Management | ✅ Supports dependency sharing through Import Maps | ✅ Supports semver ranges |
 | Sharing Strategy | ✅ Configurable at build time | ✅ Configurable sharing strategies |
@@ -192,7 +192,7 @@ Module Integration step is measured by the following attributes:
 - Scope Isolation: How module boundaries and scopes are managed
 - Error Handling: How module loading errors are managed
 
-| Feature               | Native Federation     | Module Federation |
+| Module Integration Attributes               | Native Federation     | Module Federation |
 | --------------------- | --------------------- | ----------------- |
 | Initialization Control | ❌ Standard ESM initialization | ✅ Container initialization API |
 | Scope Isolation | ❌ Basic ES Module scoping | ✅ Enhanced container isolation |
@@ -249,7 +249,7 @@ Runtime Control step is measured by the following attributes:
 - Lifecycle Management: How module lifecycles are managed
 - Module Graph Management: How the module graph is updated during runtime
 
-| Feature               | Native Federation     | Module Federation |
+| Runtime Control Attributes               | Native Federation     | Module Federation |
 | --------------------- | --------------------- | ----------------- |
 | Module Loading | ❌ Limited control | ✅ Programmatic control |
 | Lifecycle Management | ❌ Basic ESM lifecycle | ✅ Full lifecycle control |
@@ -272,7 +272,7 @@ Runtime Extension step is measured by the following attributes:
 - Monitoring Capabilities: Support for logging and performance tracking
 - Security Controls: Implementation of access control and license enforcement
 
-| Attribute | Native Federation | Module Federation |
+| Runtime Extension Attributes | Native Federation | Module Federation |
 |--|--|--|
 | Plugin Support | ❌ No plugin system | ✅ Extensible plugin system |
 | Security Controls | ❌ Manual implementation required | ✅ Plugin-based security framework |
