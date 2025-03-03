@@ -1,0 +1,121 @@
+@startuml Module Federation Code Integration Flow
+
+participant "User Code" as User
+participant "Module Federation\nRuntime" as MF
+participant "Browser DOM" as Browser
+participant "Remote MFE\nServer" as Remote
+
+== Share Scope Management ==
+note over MF
+  Share Scope is a global registry that:
+  - Manages shared dependency versions
+  - Enforces singleton patterns
+  - Handles version conflicts
+  - Maintains module state
+end note
+
+group 1. Share Scope Initialization
+    User -> MF: init()
+    activate MF
+    note right
+      Runtime Configuration:
+      - Define shared dependencies
+      - Set version requirements
+      - Configure sharing strategy
+    end note
+
+    MF -> MF: __webpack_init_sharing__("default")
+    note right
+      Global Scope Setup:
+      - Create scope container
+      - Initialize version registry
+      - Setup sharing policies
+    end note
+
+    MF -> MF: __webpack_share_scopes__[scope]
+    note right
+      Version Management:
+      - Register available versions
+      - Setup version resolution
+      - Configure singletons
+    end note
+end
+
+group 2. Module Integration Process
+    MF -> MF: containerProvider.init(__webpack_share_scopes__)
+    note right
+      Container Setup:
+      - Connect to share scope
+      - Initialize module factories
+      - Setup dependency graph
+    end note
+
+    MF -> MF: get(moduleId).then(factory)
+    note right
+      Module Resolution:
+      - Locate module factory
+      - Check dependency graph
+      - Prepare initialization
+    end note
+
+    MF -> MF: __webpack_require__.f.consumes
+    note right
+      Dependency Resolution:
+      - Check share scope
+      - Resolve version conflicts
+      - Load shared modules
+    end note
+
+    MF -> MF: __webpack_require__.m[moduleId]
+    note right
+      Module Initialization:
+      - Create module instance
+      - Setup module exports
+      - Handle dependencies
+    end note
+
+    MF -> Browser: Load and execute module
+    activate Browser
+    note right
+      Runtime Integration:
+      - Execute module code
+      - Initialize state
+      - Setup public API
+    end note
+    Browser --> MF: Module ready
+    deactivate Browser
+end
+
+group 3. Share Scope Runtime Behavior
+    MF -> MF: Version resolution
+    note right
+      Resolution Process:
+      1. Check requested version
+      2. Find compatible version
+      3. Apply sharing strategy
+      4. Return or initialize
+    end note
+
+    MF -> MF: Singleton enforcement
+    note right
+      Singleton Management:
+      1. Check existing instance
+      2. Validate version match
+      3. Share or create new
+      4. Update registry
+    end note
+
+    MF -> MF: Module lifecycle
+    note right
+      State Management:
+      1. Track initialization
+      2. Manage dependencies
+      3. Handle updates
+      4. Cleanup if needed
+    end note
+end
+
+MF --> User: Module system ready
+deactivate MF
+
+@enduml

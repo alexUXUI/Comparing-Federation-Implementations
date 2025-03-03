@@ -1,0 +1,145 @@
+@startuml Module Federation Code Resolution Flow
+
+participant "User Code" as User
+participant "Service Discovery\nAPI" as SDA
+participant "Module Federation\nRuntime" as MF
+participant "Browser DOM" as Browser
+participant "Remote MFE\nServer" as Remote
+
+== Code Resolution Layer ==
+
+group 1. Code Discovery
+    User -> SDA: GET /federation/remotes
+    activate SDA
+    note right: Discover available MFEs\nand their locations
+    SDA --> User: 200 OK\n{remotes: [{name: "@demo/app1", url: "..."}]}
+    deactivate SDA
+end
+
+group 2. Runtime Initialization
+    User -> MF: init()
+    note right
+      Runtime Configuration:
+      name: "@demo/app-main"
+      remotes: []
+      shareStrategy: "version-first"
+      shared: {}
+      shareStragey: "version-first"
+    end note
+    activate MF
+    
+    MF -> MF: Initialize Share Scope
+    note right
+      Share Scope Setup:
+      - Create global scope container
+      - Register shared dependencies
+      - Setup version resolution
+      - Configure sharing strategies
+    end note
+end
+
+group 3. Remote Code Resolution
+    loop for each remote
+        MF -> Remote: GET /mf-manifest.json
+        activate Remote
+        note right
+          Asset Resolution:
+          - Load remote manifest
+          - Process exposed modules
+          - Resolve shared deps
+          - Map chunk locations
+          - Setup preloading info
+        end note
+        Remote --> MF: Return manifest
+        deactivate Remote
+
+        MF -> MF: __webpack_init_sharing__("default")
+        note right
+          Share Scope Initialization:
+          - Create global scope container
+          - Initialize version maps
+          - Setup singleton enforcement
+        end note
+
+        MF -> MF: __webpack_share_scopes__[scope]
+        note right
+          Scope Management:
+          - Register shared modules
+          - Track module versions
+          - Maintain singleton state
+        end note
+
+        MF -> MF: containerProvider.init(__webpack_share_scopes__)
+        note right
+          Container Initialization:
+          - Initialize remote container
+          - Connect shared scopes
+          - Setup module factories
+        end note
+
+        MF -> MF: get(moduleId).then(factory)
+        note right
+          Module Factory Resolution:
+          - Resolve module request
+          - Load module factory
+          - Initialize module instance
+        end note
+
+        MF -> MF: __webpack_require__.f.consumes
+        note right
+          Shared Module Resolution:
+          - Check shared scope
+          - Resolve version conflicts
+          - Load shared instances
+        end note
+
+        MF -> MF: __webpack_require__.m[moduleId]
+        note right
+          Module Registration:
+          - Register module exports
+          - Cache module instance
+          - Handle circular deps
+        end note
+    end
+end
+
+== Share Scope Conceptual Overview ==
+note over MF
+  Share Scope is a global registry that:
+  - Manages shared dependency versions across containers
+  - Enforces singleton patterns for shared modules
+  - Handles version resolution conflicts
+  - Maintains module lifecycle and initialization state
+  - Coordinates sharing between host and remotes
+end note
+
+group Host-Remote Share Scope Interaction
+    MF -> MF: Host initializes share scope
+    note right
+      Host Setup:
+      - Defines shared module versions
+      - Sets sharing strategies
+      - Initializes global scope
+    end note
+
+    MF -> MF: Remote connects to share scope
+    note right
+      Remote Integration:
+      - Validates shared versions
+      - Resolves version conflicts
+      - Registers remote modules
+      - Connects to host's scope
+    end note
+
+    MF -> MF: Runtime module loading
+    note right
+      Module Loading Process:
+      1. Check share scope for existing instance
+      2. Resolve version requirements
+      3. Initialize if needed
+      4. Return shared instance
+      5. Cache for reuse
+    end note
+end
+
+@enduml

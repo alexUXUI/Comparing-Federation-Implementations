@@ -1,0 +1,90 @@
+@startuml Native Federation Initialization Flow
+
+participant "User Code" as User
+participant "Service Discovery\nAPI" as SDA
+participant "Native Federation\nRuntime" as NF
+participant "Browser DOM" as Browser
+participant "Remote MFE\nServer" as Remote
+
+== Integration Layer ==
+note over NF
+  Integration Layer conceptually:
+  Manages shared dependencies, resolves versions,
+  and creates a unified module resolution strategy
+  through import maps
+end note
+
+group 1. Shared Dependency Resolution
+    NF -> NF: processHostInfo()
+    note right
+      - Load host's shared dependencies
+      - Process version information
+      - Setup sharing strategies
+    end note
+
+    NF -> NF: processRemoteImports(remoteInfo, baseUrl)
+    note right
+      Dependency Resolution:
+      - Map shared dependencies
+      - Apply version resolution
+      - Handle sharing strategies
+      - Create scoped imports
+    end note
+end
+
+group 2. Module Boundary Definition
+    NF -> NF: processRemoteInfo(federationInfoUrl, remoteName)
+    note right
+      Maps remote module locations:
+      - Extracts exposed module config from manifest
+      - Determines base URL for remote modules
+      - Prepares module registration
+    end note
+
+    NF -> NF: processExposed(remoteInfo, remoteName, baseUrl)
+    note right
+      Creates module import paths:
+      - Maps each exposed module to its URL
+      - Example: "./component" -> "http://host/dist/component.js"
+      - Generates import map entries for each exposed module
+    end note
+
+    NF -> NF: createRemoteImportMap(remoteInfo, remoteName, baseUrl)
+    note right
+      Builds module resolution config:
+      - Creates imports object for exposed modules
+      - Creates scopes object for dependencies
+      - Returns {imports, scopes} for import map
+    end note
+end
+
+group 3. Import Map Construction
+    NF -> NF: mergeImportMaps()
+    note right
+      Unified Resolution Strategy:
+      - Merge host and remote maps
+      - Handle scope conflicts
+      - Apply sharing rules
+    end note
+
+    NF -> NF: addRemote(remoteName, {...remoteInfo, baseUrl})
+    note right
+      Global State Management:
+      - Register remote modules
+      - Setup resolution paths
+      - Maintain module registry
+    end note
+
+    NF -> Browser: appendImportMap()
+    activate Browser
+    note right
+      Browser Integration:
+      - Install ES Module resolution rules
+      - Setup scoped package loading
+      - Enable dynamic imports
+    end note
+    Browser --> NF: Import map ready
+    deactivate Browser
+end
+
+@enduml

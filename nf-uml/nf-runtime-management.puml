@@ -1,0 +1,79 @@
+@startuml Native Federation Runtime Management Flow
+
+participant "User Code" as User
+participant "Native Federation\nRuntime" as NF
+participant "Browser DOM" as Browser
+participant "Remote MFE\nServer" as Remote
+
+== Runtime Management Layer ==
+note over NF
+  Runtime Management Layer conceptually:
+  Handles dynamic module loading using ES Module system
+  and manages module state through global registry
+end note
+
+group 1. Module Load Request
+    User -> NF: loadRemoteModule(options)
+    activate NF
+    note right
+      Options can be:
+      - {remoteName, exposedModule}
+      - {remoteEntry, exposedModule}
+    end note
+
+    NF -> NF: normalizeOptions()
+    note right: Standardize input format\nValidate required parameters
+end
+
+group 2. Remote Initialization Check
+    NF -> NF: ensureRemoteInitialized()
+    note right
+      If remote not initialized:
+      - Process remote manifest
+      - Create new import map
+      - Append as additional import map
+      - Cannot modify existing maps
+    end note
+
+    NF -> NF: getRemoteNameByOptions()
+    note right: Resolve remote name from\noptions or baseUrl
+end
+
+group 3. Module Resolution
+    NF -> NF: getRemote(remoteName)
+    note right
+      Access global state:
+      - Query remoteNamesToRemote Map
+      - Validate remote exists
+    end note
+
+    NF -> NF: Find exposed module
+    note right
+      Validate module:
+      - Check remote.exposes array
+      - Verify module exists
+      - Get module's output filename
+    end note
+
+    NF -> NF: joinPaths(remote.baseUrl, exposed.outFileName)
+    note right: Construct final module URL
+end
+
+group 4. Module Loading
+    NF -> Browser: importShim(url)
+    activate Browser
+    note right
+      ES Module Loading:
+      - Browser processes all import maps in order
+      - Later maps take precedence
+      - Resolves modules using combined mappings
+      - Loads and initializes module
+    end note
+    Browser --> NF: Return loaded module
+    deactivate Browser
+end
+
+NF --> User: Return initialized module
+deactivate NF
+
+@enduml

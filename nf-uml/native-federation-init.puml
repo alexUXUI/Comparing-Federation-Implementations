@@ -1,0 +1,86 @@
+@startuml Native Federation Initialization Flow
+
+participant "User Code" as User
+participant "Service Discovery\nAPI" as SDA
+participant "Native Federation\nRuntime" as NF
+participant "Browser DOM" as Browser
+participant "Remote MFE\nServer" as Remote
+
+== Code Resolution Layer ==
+
+group 1. Code Discovery
+    User -> SDA: GET /federation/remotes
+    activate SDA
+    note right: Discover available MFEs\nand their locations
+    SDA --> User: 200 OK\n{remotes: [{name: "mfe1", url: "..."}]}
+    deactivate SDA
+end
+
+group 2. Runtime Initialization
+    User -> NF: initFederation(remotesOrManifestUrl)
+    activate NF
+    note right
+      Initialize federation runtime with:
+      - Discovered remote configurations
+      - Setup module resolution system
+      - Prepare import map infrastructure
+    end note
+end
+
+group 3. Remote Code Resolution
+    loop for each remote
+        NF -> Remote: HTTP GET /remoteEntry.json
+        activate Remote
+        note right
+          Asset Resolution:
+          - Fetch remote's federation manifest
+          - Determine exposed modules
+          - Map dependencies
+        end note
+        Remote --> NF: 200 OK\n{exposes, shared, outFileName}
+        deactivate Remote
+    end
+end
+
+== Integration Layer ==
+note over NF
+  Integration Layer conceptually:
+  Transforms raw manifest data into a structured
+  import map that the browser can use to resolve
+  ES module requests at runtime
+end note
+
+NF -> NF: processRemoteInfo(federationInfoUrl, remoteName)
+note right: Creates import map and registers remote
+
+NF -> NF: createRemoteImportMap(remoteInfo, remoteName, baseUrl)
+
+NF -> NF: processHostInfo()
+note right: Process local shared deps\nand create host import map
+
+NF -> NF: processExposed(remoteInfo, remoteName, baseUrl)
+note right: Maps exposed modules to URLs\nusing joinPaths()
+
+NF -> NF: processRemoteImports(remoteInfo, baseUrl)
+note right: Handles shared dependencies:\n- getExternalUrl()\n- setExternalUrl()\n- Creates scoped imports
+
+NF -> NF: mergeImportMaps()
+note right: Combine host and remote\nimport mappings
+
+NF -> NF: addRemote(remoteName, {...remoteInfo, baseUrl})
+note right: Registers remote in global maps:\n- remoteNamesToRemote\n- baseUrlToRemoteNames
+
+NF -> Browser: appendImportMap()
+activate Browser
+note right: Install ES Module\nimport map in DOM
+Browser --> NF: Import map ready
+deactivate Browser
+
+== Runtime Management Layer ==
+NF -> NF: Initialize __NATIVE_FEDERATION__
+note right: Setup global state:\n- externals Map\n- remoteNamesToRemote Map\n- baseUrlToRemoteNames Map
+
+NF --> User: Return importMap
+deactivate NF
+
+@enduml

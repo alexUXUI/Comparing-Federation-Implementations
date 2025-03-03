@@ -1,0 +1,12 @@
+{
+  "scripts": {
+    "dev": "pnpm --parallel -r run dev",
+    "build": "pnpm -r run build",
+    "preview": "pnpm --parallel -r run preview",
+    "format": "pnpm -r run format",
+    "check": "pnpm -r run check"
+  },
+  "devDependencies": {
+    "serve": "^14.2.4"
+  }
+}

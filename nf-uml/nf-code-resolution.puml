@@ -1,0 +1,45 @@
+@startuml Native Federation Initialization Flow
+
+participant "User Code" as User
+participant "Service Discovery\nAPI" as SDA
+participant "Native Federation\nRuntime" as NF
+participant "Browser DOM" as Browser
+participant "Remote MFE\nServer" as Remote
+
+== Code Discovery ==
+
+User -> SDA: GET /federation/remotes
+activate SDA
+note right: Discover available MFEs\nand their locations
+SDA --> User: 200 OK\n{remotes: [{name: "mfe1", url: "..."}]}
+deactivate SDA
+
+
+== Code Resolution Layer ==
+
+group 1. Runtime Initialization
+    User -> NF: initFederation(remotesOrManifestUrl)
+    activate NF
+    note right
+      Initialize NF Runtime:
+      - Configures the runtime with the provided remotes or manifest URL
+
+    end note
+end
+
+group 2. Remote Code Resolution
+    loop for each remote
+        NF -> Remote: HTTP GET /remoteEntry.json
+        activate Remote
+        note right
+          Asset Resolution:
+          - Fetch remote's federation remoteEntry
+          - Determine exposed modules
+          - Map dependencies
+        end note
+        Remote --> NF: 200 OK\n{exposes, shared, outFileName}
+        deactivate Remote
+    end
+end
+
+@enduml

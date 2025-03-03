@@ -1,0 +1,97 @@
+{
+  "name": "3002-checkout",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/3002-checkout",
+  "projectType": "application",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/next:build",
+      "defaultConfiguration": "production",
+      "options": {
+        "outputPath": "apps/3002-checkout"
+      },
+      "configurations": {
+        "development": {
+          "outputPath": "apps/3002-checkout"
+        },
+        "production": {}
+      },
+      "dependsOn": [
+        {
+          "target": "build",
+          "dependencies": true
+        }
+      ]
+    },
+    "serve": {
+      "executor": "@nx/next:server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "3002-checkout:build",
+        "dev": true,
+        "port": 3002
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "3002-checkout:build:development",
+          "dev": true,
+          "port": 3002
+        },
+        "production": {
+          "buildTarget": "3002-checkout:build:production",
+          "dev": false,
+          "port": 3002
+        }
+      },
+      "dependsOn": [
+        {
+          "target": "build",
+          "dependencies": true
+        }
+      ]
+    },
+    "export": {
+      "executor": "@nx/next:export",
+      "options": {
+        "buildTarget": "3002-checkout:build:production"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/3002-checkout/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test:e2e": {
+      "executor": "nx:run-commands",
+      "options": {
+        "parallel": true,
+        "commands": [
+          {
+            "command": "lsof -i :3002 || nx run 3002-checkout:serve",
+            "forwardAllArgs": false
+          },
+          {
+            "command": "sleep 5 && nx run 3002-checkout:e2e",
+            "forwardAllArgs": true
+          }
+        ]
+      }
+    },
+    "e2e": {
+      "executor": "@nx/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/3002-checkout/cypress.config.ts",
+        "testingType": "e2e",
+        "baseUrl": "http://localhost:3002"
+      },
+      "configurations": {
+        "production": {
+          "baseUrl": "http://localhost:3002"
+        }
+      }
+    }
+  }
+}

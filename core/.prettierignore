@@ -1,0 +1,13 @@
+# Add files here to ignore them from prettier formatting
+
+/dist
+/coverage
+**/*.hbs
+*.md
+!README.md
+pnpm-lock.yaml
+**/dist/**
+apps/website-new/docs
+
+/.nx/workspace-data
+/.nx/cache

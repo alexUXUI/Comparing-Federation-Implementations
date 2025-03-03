@@ -1,0 +1,22 @@
+{
+  "name": "product",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "rsbuild build",
+    "check": "biome check --write",
+    "dev": "rsbuild dev --open",
+    "format": "biome format --write",
+    "preview": "rsbuild preview"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.4",
+    "@module-federation/rsbuild-plugin": "^0.9.1",
+    "@rsbuild/core": "^1.2.11",
+    "typescript": "^5.7.3"
+  },
+  "dependencies": {
+    "@module-federation/enhanced": "^0.9.1"
+  }
+}

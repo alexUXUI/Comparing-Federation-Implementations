@@ -1,0 +1,59 @@
+@startuml Native Federation Bootstrap Flow
+
+participant "Bootstrap" as Boot
+participant "App\nComponent" as App
+participant "Native Federation\nRuntime" as NF
+participant "React" as React
+participant "Browser DOM" as Browser
+participant "Remote MFE\nServer" as Remote
+
+== Application Bootstrap ==
+Boot -> React: import React from "react"
+Boot -> React: import ReactDOM from "react-dom"
+Boot -> App: import { App } from "./app"
+
+Boot -> React: ReactDOM.render()
+activate React
+
+React -> App: Create App Component
+activate App
+
+App -> React: React.lazy(() => ...)
+activate React
+note right: Creates lazy-loaded\ncomponent boundary
+
+App -> NF: loadRemoteModule({remoteName: "mfe1", exposedModule: "./component"})
+activate NF
+
+NF -> NF: normalizeOptions()
+note right: Validates and normalizes\nremote module options
+
+NF -> NF: ensureRemoteInitialized()
+note right: Checks if remote is ready
+
+NF -> Remote: Fetch remote module
+activate Remote
+Remote --> NF: Return module code
+deactivate Remote
+
+NF -> Browser: Import module via importShim
+activate Browser
+note right: Uses import map to\nresolve module URL
+Browser --> NF: Module loaded
+deactivate Browser
+
+NF --> App: Return remote module
+deactivate NF
+
+App -> React: React.Suspense
+note right: Wraps remote component\nwith suspense boundary
+
+React -> Browser: Render to DOM
+activate Browser
+Browser --> React: DOM Updated
+deactivate Browser
+
+deactivate React
+deactivate App
+
+@enduml

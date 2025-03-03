@@ -1,0 +1,77 @@
+@startuml
+title Module Federation Runtime Initialization and Module Loading Sequence
+
+participant "Host App" as Host
+participant "Federation Runtime" as Runtime
+participant "Container Handler" as Container
+participant "Share Handler" as ShareScope
+participant "Remote App" as Remote
+
+note over Host, Remote
+  Module Federation Runtime Initialization Flow
+  Shows the sequence of events from host initialization
+  to remote module loading with share scope management
+end note
+
+autonumber
+
+== Runtime Initialization Phase ==
+
+Host -> Runtime: init()
+
+note right
+  Host initializes Federation runtime with:
+  - Application name
+  - Remote entry configurations
+  - Optional shared dependency config
+end note
+
+Runtime -> ShareScope: initSharing()
+
+note right of ShareScope
+  Share Handler initialized to manage:
+  - Shared dependency registry
+  - Version resolution
+  - Singleton enforcement
+end note
+
+== Module Integration Phase ==
+
+Host -> Runtime: loadRemote('@app/remote/module')
+
+Runtime -> Container: resolveContainer()
+
+note right
+  Container resolution:
+  - Fetch remote container if not cached
+  - Initialize container instance
+  - Setup module loading context
+end note
+
+Container -> ShareScope: resolveSharedDependencies()
+
+note right
+  Resolves shared dependencies:
+  1. Check version compatibility
+  2. Load if not present
+  3. Return singleton instance
+end note
+
+ShareScope --> Container: resolvedDependencies
+
+Container -> Remote: loadModuleScript()
+
+Remote --> Container: moduleInstance
+
+Container --> Runtime: initializedModule
+
+Runtime --> Host: exportedModule
+
+note over Host, Remote
+  Module successfully loaded with:
+  - Resolved dependencies
+  - Initialized scope
+  - Managed lifecycle
+end note
+
+@enduml
