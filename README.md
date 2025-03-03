@@ -86,16 +86,16 @@ Measured by:
 - Configurability: The options for configuring the runtime
 - Independence: Independent runtime support
 
-| Properties               | Native Federation     | Module Federation |
+| Property               | Native Federation     | Module Federation |
 | --------------------- | --------------------- | ----------------- |
 | Configurability | ❌ No support for runtime share scope configuration. Smaller API. | ✅ can configure shared deps at runtime. Broader API. |
 | Independence | ❌ No support for independent runtimes (by default) | ✅ supports independent runtimes |
 
-#### Configurability Property
+#### Configurability
 
 Module Federation [init](https://module-federation.io/guide/basic/runtime.html#init) allows runtime share scope configuration in addition to remotes.
 
-#### Independence Property
+#### Independence
 
 Native Federation relies on import maps, requiring all remotes to be defined in the host, introducing tight coupling. Module Federation supports independent runtimes, allowing services to load dynamically without host coordination.
 
@@ -109,7 +109,7 @@ Measured by:
 
 - **Initial Load Performance**: Network calls, render-blocking resources, LCP, CPU throttle
 
-| Resolution Step Properties               | Native Federation     | Module Federation |
+| Property               | Native Federation     | Module Federation |
 | --------------------- | --------------------- | ----------------- |
 | Initial load Performance | ❌ | ✅ |
 | # Network calls | 19 | 11 |
@@ -159,13 +159,13 @@ Dependency Resolution step is measured by the following Properties:
 | Version Management | ✅ Import Maps | ✅ Semver ranges |
 | Sharing Strategy | ✅ Build-time configuration | ✅ Flexible sharing strategies |
 
-#### Version Management Property
+#### Version Management
 
 Native Federation uses Import Maps and EcmaScript modules to manage shared dependencies. It provides the `shareAll` helper that can share all dependencies found in package.json, with options for singleton management and version control. While it requires more precise version matching, it embraces emerging browser standards for module resolution.
 
 Module Federation uses a container-based architecture that enables flexible version resolution through semver ranges, providing more flexibility in version management.
 
-#### Sharing Strategy Property
+#### Sharing Strategy
 
 Native Federation provides a straightforward sharing strategy through the `shareAll` helper with configurable options: `singleton`, `strictVersion`, `requiredVersion`, `includeSecondaries`, and `skip`
 
@@ -183,11 +183,11 @@ Module Integration step is measured by the following Properties:
 | Initialization Control | ❌ Standard ESM initialization | ✅ Container initialization API |
 | Scope Isolation | ❌ Basic ES Module scoping | ✅ Enhanced container isolation |
 
-#### Initialization Control Property
+#### Initialization Control
 
 Module Federation's container initialization API offers fine-grained control over module loading and initialization, while Native Federation uses standard ESM initialization.
 
-#### Scope Isolation Property
+#### Scope Isolation
 
 Module Federation provides enhanced container isolation through its container-based architecture, while Native Federation relies on basic ES Module scoping.
 
