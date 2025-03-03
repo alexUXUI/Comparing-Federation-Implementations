@@ -322,7 +322,7 @@ Native Federation's integration with standard ES modules means error handling mu
 
 #### Monitoring Capabilities
 
-Module Federation provides comprehensive logging and monitoring hooks for tracking:
+Module Federation provides comprehensive logging and monitoring hooks for tracking module usage patterns, dependency composition, and performance metrics. Native Federation's integration with standard ES modules means instrumentation must be managed manually.
 
 ### Runtime Management Layer Real World Impact
 
