@@ -54,13 +54,7 @@ This document compares both approaches using the Federation Conceptual Framework
 <details>
 <summary>Conceptual Framework</summary>
 
-Federation consists of three layers: Resolution, Integration, and Management.
 
-- **Layers** contain steps defining key processes.
-- **Steps** are measured by properties that provide meaningful comparisons between implementations.
-- **Properties** define key characteristics of each step and provide objective comparison criteria.
-
-The following sections analyze each layer, breaking down steps and properties to compare Module Federation and Native Federation.
 
 </details>
 
@@ -88,7 +82,7 @@ Measured by:
 
 #### Configurability
 
-Module Federation [init](https://module-federation.io/guide/basic/runtime.html#init) allows runtime share scope configuration, supporting shared singletons and stateful services across multiple MFEs.
+Module Federation [init](https://module-federation.io/guide/basic/runtime.html#init) allows runtime share scope configuration.
 
 #### Independence
 

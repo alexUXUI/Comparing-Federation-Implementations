@@ -58,13 +58,13 @@ To provide a structured comparison, we will analyze both approaches using the Fe
 
 <summary>Conceptual Framework</summary>
 
-For the purposes of this document, the concept of Federation is organized into three distinct layers: Resolution, Integration, and Management.
+Federation consists of three layers: Resolution, Integration, and Management.
 
-Each layer consists of steps, which define the key processes within that layer.
+- **Layers** contain steps defining key processes.
+- **Steps** are measured by properties that provide meaningful comparisons between implementations.
+- **Properties** define key characteristics of each step and provide objective comparison criteria.
 
-Each step is measured by a set of Properties, which serve as meaningful points of comparison across different implementations of the same step.
-
-In the following section, we will examine each layer in detail, breaking down its steps and analyzing their defining Properties to provide a structured comparison of Module Federation and Native Federation.
+The following sections analyze each layer, breaking down steps and properties to compare Module Federation and Native Federation.
 
 </details>
 
@@ -74,14 +74,14 @@ In the following section, we will examine each layer in detail, breaking down it
 
 <summary>Resolution Layer</summary>
 
-The Code Resolution Layer is the first step in the federation process, where the code is resolved and loaded into the consumer's runtime environment. This layer encompasses the following steps:
+The Resolution Layer is the first step in federation, where code is resolved and loaded into the consumer's runtime. It consists of:
 
 1.a) Runtime initialization: Configuring the runtime environment
 1.b) Code Resolution: Loading remote modules into the consumer runtime
 
 ### 1.a) Runtime Initialization Step
 
-Runtime initialization step is measured by along the following Properties:
+Measured by:
 
 - Configurability: The options for configuring the runtime
 - Independence: Independent runtime support
@@ -93,23 +93,21 @@ Runtime initialization step is measured by along the following Properties:
 
 #### Configurability Property
 
-Module Federation [init](https://module-federation.io/guide/basic/runtime.html#init) enables runtime share scope configuration, which supports use cases where the share scope is used to share singletons, and stateful services, across multiple MFE instances.
+Module Federation [init](https://module-federation.io/guide/basic/runtime.html#init) allows runtime share scope configuration in addition to remotes.
 
 #### Independence Property
 
-Native Federation's use of import maps requires all remotes to be defined in the host. This introduces tight-coupling between MFEs where the shell must load all child remote on behalf of all consumers.
+Native Federation relies on import maps, requiring all remotes to be defined in the host, introducing tight coupling. Module Federation supports independent runtimes, allowing services to load dynamically without host coordination.
 
-Module Federation supports independent runtimes by default. This capability enabling key patterns related to Service-based Delivery, where Products are free to load the Services they need, decoupling the operations and code.
-
-For Example: With module federation Products like Thread are free to independently manage their Service dependencies such as Content Viewer without host coordination.
+**Example:** With Module Federation, products like Thread can manage service dependencies independently, such as Content Viewer, without host involvement.
 
 ### 1.b) Code Resolution Step
 
-> Native Federation uses browser-native Import Maps to resolve and load modules directly through ES Module imports. Module Federation uses a Container API pattern where modules are loaded through a JSON manifest and webpack's container runtime which creates a virtual module system for resolving remote assets. These approaches have differences in terms of the runtime execution of the program.
+Native Federation uses browser-native Import Maps, while Module Federation employs a Container API that loads modules via a JSON manifest and Webpack's container runtime.
 
-Code Resolution is measured by along the following Properties:
+Measured by:
 
-- Initial load performance: Network calls, Render blocking resources, LCP, CPU throttle
+- **Initial Load Performance**: Network calls, render-blocking resources, LCP, CPU throttle
 
 | Resolution Step Properties               | Native Federation     | Module Federation |
 | --------------------- | --------------------- | ----------------- |
@@ -121,31 +119,18 @@ Code Resolution is measured by along the following Properties:
 | LCP Slow 4G | 5.03s | 2.14s |
 | LCP 3G | 17.70s | 6.14s |
 | LCP CPU throttle 20x | 0.89s | 0.49s |
-| Runtime init | 24.861083984375 ms | 18.72900390625 ms |
+| Runtime init | 24.86 ms | 18.73 ms |
 
 #### Initial Load Performance Property
 
-There are more network requests for Native Federation systems meaning that the worse the network, the worse the performance of Native Federation.
+Native Federation requires more network requests, impacting performance on poor connections. A render-blocking resource (`es-module-shims.js`) further slows app loading if bottle-necked.
 
-For the same app there were 12 network requests for module federation and 19 requests for native federation
+### Resolution Layer Real-World Impact
 
-Though part of this is due to the bundling differences between esbuild and rspack.
+The technical differences in the Resolution Layer translate into business  impacts including:
 
-Native federation also has a render blocking resource, `https://ga.jspm.io/npm:es-module-shims@1.5.17/dist/es-module-shims.js` this can add significant slow down to the entire app loading if this resource becomes bottle necked
-
-#### Resolution Layer Real World Impact
-
-The technical differences in the Resolution Layer translate into significant business and development impacts:
-
-1. **Market Reach and User Experience**
-   - Module Federation:
-     - Lower bounce rates in emerging markets due to faster initial loads
-     - Better conversion rates from improved performance on low-end devices
-     - Wider market reach through better performance on slower networks
-   - Native Federation:
-     - Higher bounce rates in markets with poor connectivity
-     - Limited reach in emerging markets due to performance constraints
-     - Better suited for markets with robust infrastructure
+- **Module Federation**: Lower bounce rates, better conversion, improved performance on low-end devices.
+- **Native Federation**: Higher bounce rates, limited reach in emerging markets, best suited for robust infrastructure.
 
 </details>
 
@@ -155,22 +140,24 @@ The technical differences in the Resolution Layer translate into significant bus
 
 <summary>Integration Layer</summary>
 
-The Integration Layer handles how federated remotes integrate with the consumer's runtime environment. This layer encompasses the following steps:
+Handles how federated remotes integrate into the consumer runtime.
 
-2.a) Dependency Resolution: Managing shared dependencies and version resolution
-2.b) Module Integration: Defining module boundaries and initialization
+Measured by:
+
+- **Version Management**: Dependency version handling
+- **Sharing Strategy**: Shared dependency handling
 
 ### 2.a) Dependency Resolution Step
 
 Dependency Resolution step is measured by the following Properties:
 
-- Version Management: How dependencies and their versions are managed
-- Sharing Strategy: How shared dependencies are handled across modules
+- **Version Management**: Dependency version handling
+- **Sharing Strategy**: Shared dependency handling
 
-| Dependency Resolution Properties               | Native Federation     | Module Federation |
-| --------------------- | --------------------- | ----------------- |
-| Version Management | ✅ Supports dependency sharing through Import Maps | ✅ Supports semver ranges |
-| Sharing Strategy | ✅ Configurable at build time | ✅ Configurable sharing strategies |
+| Property | Native Federation | Module Federation |
+|----------|------------------|-------------------|
+| Version Management | ✅ Import Maps | ✅ Semver ranges |
+| Sharing Strategy | ✅ Build-time configuration | ✅ Flexible sharing strategies |
 
 #### Version Management Property
 
@@ -188,15 +175,13 @@ Module Federation offers similar capabilities through its container-based archit
 
 Module Integration step is measured by the following Properties:
 
-- Initialization Control: Level of control over module initialization
-- Scope Isolation: How module boundaries and scopes are managed
-- Error Handling: How module loading errors are managed
+- **Initialization Control**: Control over module initialization
+- **Scope Isolation**: Module boundary management
 
 | Module Integration Properties               | Native Federation     | Module Federation |
 | --------------------- | --------------------- | ----------------- |
 | Initialization Control | ❌ Standard ESM initialization | ✅ Container initialization API |
 | Scope Isolation | ❌ Basic ES Module scoping | ✅ Enhanced container isolation |
-| Error Handling | ❌ Manual error handling | ✅ Built-in error handling |
 
 #### Initialization Control Property
 
@@ -205,10 +190,6 @@ Module Federation's container initialization API offers fine-grained control ove
 #### Scope Isolation Property
 
 Module Federation provides enhanced container isolation through its container-based architecture, while Native Federation relies on basic ES Module scoping.
-
-#### Error Handling Property
-
-Module Federation's container abstraction provides built-in error handling for module loading and dependency conflicts, while Native Federation's integration with standard ES modules means error handling must be managed manually.
 
 ### Integration Layer Real World Impact
 
@@ -236,7 +217,9 @@ The Integration Layer capabilities translate into significant implications for d
 
 <summary>Runtime Management Layer</summary>
 
-The Runtime Management Layer handles how federated services are managed during execution. This layer encompasses the following steps:
+Handles runtime execution management.
+
+Measured by:
 
 3.a) Runtime Control: Managing and controlling the loading, access, and execution of federated dependencies
 3.b) Runtime Extension: Extending the runtime with plugins and custom behaviors
