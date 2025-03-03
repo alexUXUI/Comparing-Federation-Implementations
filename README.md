@@ -133,7 +133,11 @@ Native federation also has a render blocking resource, `https://ga.jspm.io/npm:e
 
 </details>
 
-## 2) Integration Layer 
+## 2) Integration Layer
+
+<details>
+
+<summary>Integration Layer</summary>
 
 The Integration Layer handles how federated remotes integrate with the consumer's runtime environment. This layer encompasses the following steps:
 
@@ -186,7 +190,13 @@ Module Federation provides enhanced container isolation through its container-ba
 
 Module Federation's container abstraction provides built-in error handling for module loading and dependency conflicts, while Native Federation's integration with standard ES modules means error handling must be managed manually.
 
+</details>
+
 ## 3) Runtime Management Layer
+
+<details>
+
+<summary>Runtime Management Layer</summary>
 
 The Runtime Management Layer handles how federated services are managed during execution. This layer encompasses the following steps:
 
@@ -247,7 +257,13 @@ Module Federation provides comprehensive logging and monitoring hooks for tracki
 - Dependency resolution
 - Runtime state changes
 
+</details>
+
 ## Options Comparison
+
+<details>
+
+<summary>Options Comparison</summary>
 
 ### High-Level Summary on Differences
 
@@ -268,6 +284,8 @@ Module Federation and Native Federation represent fundamentally different approa
 | Resolution | • Uses browser-native Import Maps<br>• More network requests (19 vs 11)<br>• Has render-blocking resources<br>• Slower LCP across network conditions | • Container-based virtual module system<br>• Fewer network requests<br>• No render-blocking resources<br>• Better LCP performance<br>• Runtime share scope configuration |
 | Integration | • Exact version matching<br>• Basic ES Module scoping<br>• Standard ESM initialization<br>• Manual error handling<br>• Common dependency sharing | • Semver range support<br>• Enhanced container isolation<br>• Container initialization API<br>• Built-in error handling<br>• Configurable sharing strategies |
 | Management | • Limited module loading control<br>• Basic ESM lifecycle<br>• No plugin system<br>• Limited monitoring capabilities<br>• Manual error handling | • Programmatic module loading<br>• Full lifecycle control<br>• Extensible plugin system<br>• Comprehensive monitoring<br>• Built-in recovery mechanisms |
+
+</details>
 
 ## Conclusion
 
