@@ -205,19 +205,9 @@ Native Federation, in contrast, relies on the browser's global module system, wh
    - No built-in support for multiple share scopes
    - Share scope configuration is determined at build time
 
-2. **Limited State Management**
-   - Manual implementation required for state isolation
-   - No built-in singleton management
-   - Global state must be managed through custom solutions
-
-This difference in sharing strategy has significant implications:
-
-- Module Federation enables independent micro-frontends with isolated dependencies, A/B testing different versions of shared libraries, and gradual migration strategies
-- Native Federation's global scope provides simpler setup but requires careful coordination between teams and has limited options for dependency isolation
-
 ### 2.b) Module Integration Step
 
-Module Integration step is measured by the following Properties:
+Module Integration step is measured by the following properties:
 
 - **Initialization Control**: Control over module initialization
 - **Scope Isolation**: Module boundary management
@@ -250,8 +240,10 @@ The Integration Layer capabilities translate into significant implications for d
 
 3. **Global State Management**
    - Module Federation's eager shared dependencies and container initialization ensure state is available immediately, reducing state synchronization issues
-   - Share scope system provides a unified state management layer across all micro-frontends
-   - Native Federation's basic ESM scoping requires manual state synchronization, requiring additional effort to maintain state consistency
+
+4. **Isolation**
+    - Module Federation enables independent micro-frontends with isolated dependencies, A/B testing different versions of shared libraries, and gradual migration strategies
+    - Native Federation's global scope provides simpler setup but requires careful coordination between teams and has limited options for dependency isolation
 
 </details>
 
