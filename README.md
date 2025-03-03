@@ -2,9 +2,8 @@
 
 ## Table of Contents
 
-<details>
 
-<summary>Content</summary>
+
 
 1. [Introduction](#introduction)
 2. [Federation Conceptual Framework](#federation-conceptual-framework)
@@ -38,13 +37,7 @@
 6. [Options Comparison](#options-comparison)
 7. [Conclusion](#conclusion)
 
-</details>
-
 ## Introduction
-
-<details>
-
-<summary>Introduction</summary>
 
 Module Federation (MF) and Native Federation (NF) represent two distinct approaches to implementing the same concept of code federation. Each approach comes with its own strengths and weaknesses, making the choice between them highly dependent on the specific needs and requirements of the application.
 
@@ -52,13 +45,7 @@ To provide a structured comparison, we will analyze both approaches using the Fe
 
 The ultimate goal is to determine the "Real World" impacts of choosing between MF and NF. As such, the Real World impact will be discussed in each layer, with a high-level summary in the Conclusion section.
 
-</details>
-
 ## Federation Conceptual Framework
-
-<details>
-
-<summary>Conceptual Framework</summary>
 
 Federation consists of three layers: Resolution, Integration, and Management.
 
@@ -68,13 +55,7 @@ Federation consists of three layers: Resolution, Integration, and Management.
 
 The following sections analyze each layer, breaking down steps and properties to compare Module Federation and Native Federation.
 
-</details>
-
 ## 1) Resolution Layer
-
-<details>
-
-<summary>Resolution Layer</summary>
 
 The Resolution Layer is the first step in federation, where code is resolved and loaded into the consumer's runtime. It consists of:
 
@@ -139,13 +120,7 @@ The technical differences in the Resolution Layer translate into business impact
 - **Module Federation**: Lower bounce rates, better conversion, improved performance on low-end devices.
 - **Native Federation**: Higher bounce rates, limited reach in emerging markets, best suited for robust infrastructure.
 
-</details>
-
 ## 2) Integration Layer
-
-<details>
-
-<summary>Integration Layer</summary>
 
 Handles how federated remotes integrate into the consumer runtime.
 
@@ -241,13 +216,7 @@ The Integration Layer capabilities translate into significant implications for d
     - Module Federation enables independent micro-frontends with isolated dependencies, A/B testing different versions of shared libraries, and gradual migration strategies
     - Native Federation's global scope provides simpler setup but requires careful coordination between teams and has limited options for dependency isolation
 
-</details>
-
 ## 3) Runtime Management Layer
-
-<details>
-
-<summary>Runtime Management Layer</summary>
 
 Handles runtime execution management.
 
@@ -344,13 +313,7 @@ The technical capabilities of the Runtime Management Layer translate into signif
    - Increased visibility for module usage patterns, leading to more insights on composition patterns
    - Lower effort to debug and troubleshoot issues
 
-</details>
-
 ## Options Comparison
-
-<details>
-
-<summary>Options Comparison</summary>
 
 ### High-Level Summary on Differences
 
@@ -372,13 +335,7 @@ Module Federation and Native Federation represent quite similar mental models, b
 | Dependency Resolution | Static Import Maps configuration<br> - URL-based module resolution<br> - Direct browser module loading<br> - Single global module scope<br> - Build-time version locking | Dynamic share scope system<br> - Container-based resolution<br> - Federated chunk loading<br> - Multiple isolated scopes<br> - Runtime version resolution |
 | Runtime Architecture | Native ESM initialization<br> - Browser module cache<br> - Standard module lifecycle | Container initialization API<br> - Virtual module registry<br> - Custom module lifecycle hooks<br> |
 
-</details> 
-
 ## Real World Impact Analysis
-
-<details>
-
-<summary>Real World Impact Analysis</summary>
 
 Based on our analysis across the three layers of federation, here are the real-world implications of choosing each approach:
 
@@ -392,13 +349,7 @@ Based on our analysis across the three layers of federation, here are the real-w
 
 Both Module Federation and Native Federation implementations continue to evolve, with each approach developing features to address emerging use cases in the federation space. While Module Federation provides extensive runtime management capabilities through its container API and plugin system, Native Federation leverages browser-native ES Modules to implement federation features. The two approaches represent different architectural choices in implementing federation concepts, each with their own trade-offs in terms of flexibility, complexity, and browser compatibility.
 
-</details>
-
 ## Conclusion
-
-<details>
-
-<summary>Conclusion</summary>
 
 While there is no one-size-fits-all solution, Module Federation's container-based architecture and plugin system provide a flexible and extensible runtime management system, while Native Federation's integration with standard ES modules provides a familiar and familiar user experience. For performance and extensibility Module Federation is preferred. For quite simple projects, and adherence to standards, Native Federation is preferred.
 
@@ -418,14 +369,7 @@ Below is a summary table, showing the tables from the previous sections.
 | | Runtime Control | - Fine-grained loading control<br>- Advanced lifecycle management<br>- Flexible module graph control | - Basic loading mechanisms<br>- Limited lifecycle control<br>- Static module relationships |
 | | Runtime Extension | - Rich plugin ecosystem<br>- Custom feature development<br>- Scalable team workflows<br>- Senior developer focus | - Limited extensibility<br>- Basic feature set<br>- Suitable for smaller teams<br>- Junior developer friendly |
 
-</details>
-
-<details>
-
-
 ## Further Considerations
-
-<summary>Further Considerations</summary>
 
 In addition to the technical aspects above, there are some other important things to consider when choosing these technologies. First, Module Federation is the clear thought leader in the space. Second, Module Federation comes with greater support for developer productivity in the form of: documentation, tooling, and large community.
 
@@ -473,5 +417,3 @@ Additionally, it is worth nothing that the Module Federation team is the intelle
 4) Module Federation has more framework adapters, supporting React and Vue while Native Federation is primarily focused on Angular.
 
 5) Module Federation provides automatic TypeScript remote types, enabling fully typed development experiences across federated boundaries, allowing engineers to have a fully typed integration experience. Native Federation lacks robust type support across module boundaries, resulting in diminished IDE assistance and type safety.
-
-</details>
