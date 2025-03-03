@@ -334,7 +334,7 @@ Module Federation and Native Federation represent quite similar mental models, b
 | ---------------- | ----------------- | ----------------- |
 | Resolution | • Uses browser-native Import Maps<br>• More network requests (19 vs 11)<br>• Has render-blocking resources<br>• Slower LCP across network conditions | • Container-based virtual module system<br>• Fewer network requests<br>• No render-blocking resources<br>• Better LCP performance<br>• Runtime share scope configuration |
 | Integration | • Exact version matching<br>• Basic ES Module scoping<br>• Standard ESM initialization<br>• Manual error handling<br>• Common dependency sharing | • Semver range support<br>• Enhanced container isolation<br>• Container initialization API<br>• Built-in error handling<br>• Configurable sharing strategies |
-| Management | • Limited module loading control<br>• Basic ESM lifecycle<br>• No plugin system<br>• Limited monitoring capabilities<br>• Manual error handling | • Programmatic module loading<br>• Full lifecycle control<br>• Extensible plugin system<br>• Comprehensive monitoring<br>• Built-in recovery mechanisms |
+| Management | • Manual module loading control<br>• Basic ESM lifecycle<br>• No plugin system<br>• Limited monitoring capabilities<br>• Manual error handling | • Programmatic module loading with support for preloading<br>• Full lifecycle control<br>• Extensible plugin system<br>• Lifecycle based monitoring<br>• Built-in recovery mechanisms |
 
 </details>
 
