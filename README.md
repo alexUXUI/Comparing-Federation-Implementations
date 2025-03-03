@@ -89,7 +89,7 @@ Measured by:
 | Property               | Native Federation     | Module Federation |
 | --------------------- | --------------------- | ----------------- |
 | Configurability | No support for share scope configuration. Smaller API. | Can configure shared deps at runtime. Broader API. |
-| Independence | No default support | Supports independent runtimes |
+| Independence | No default support for independent runtimes or nested remotes. | Supports independent runtimes and nested remotes. |
 
 #### Configurability
 
@@ -111,7 +111,7 @@ Measured by:
 
 | Property               | Native Federation     | Module Federation |
 | --------------------- | --------------------- | ----------------- |
-| Initial load Performance | | |
+| Initial load Performance | Less performant | More performant |
 | # Network calls | 19 | 11 |
 | # Render blocking resource | 1 | 0 |
 | LCP normal connection | 110ms | 50ms |
@@ -120,6 +120,11 @@ Measured by:
 | LCP 3G | 17.70s | 6.14s |
 | LCP CPU throttle 20x | 0.89s | 0.49s |
 | Runtime init | 24.86 ms | 18.73 ms |
+
+> Note: These lab metrics were conducted on a Apple M3 Max chip with 36 GB and 5G internet connection.
+> The methodology involved using Chrome Developer tools to throttle the CPU and Network.
+> The data was gathered using Chrome Developer tools performance panel, custom performance timings, and lighthouse.
+> Network cache was disabled to ensure initial load conditions were not cached. For more please see [measurements](./performance-measurements/)
 
 #### Initial Load Performance Property
 
