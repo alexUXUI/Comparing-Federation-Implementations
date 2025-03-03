@@ -38,11 +38,21 @@
 
 ## Introduction
 
+<details>
+
+<summary>Introduction</summary>
+
 Module Federation (MF) and Native Federation (NF) represent two distinct approaches to implementing the same concept of code federation. Each approach comes with its own strengths and weaknesses, making the choice between them highly dependent on the specific needs and requirements of the application.
 
 To provide a structured comparison, we will analyze both approaches using the Federation Conceptual Framework, evaluating their strengths and weaknesses within a standardized model.
 
+</details>
+
 ## Federation Conceptual Framework
+
+<details>
+
+<summary>Conceptual Framework</summary>
 
 For the purposes of this document, the concept of Federation is organized into three distinct layers: Resolution, Integration, and Management.
 
@@ -52,7 +62,13 @@ Each step is measured by a set of attributes, which serve as meaningful points o
 
 In the following section, we will examine each layer in detail, breaking down its steps and analyzing their defining attributes to provide a structured comparison of Module Federation and Native Federation.
 
+</details>
+
 ## 1) Resolution Layer
+
+<details>
+
+<summary>Resolution Layer</summary>
 
 The Code Resolution Layer is the first step in the federation process, where the code is resolved and loaded into the consumer's runtime environment. This layer encompasses the following steps:
 
@@ -114,6 +130,8 @@ Though part of this is due to the bundling differences between esbuild and rspac
 Native federation also has a render blocking resource, `https://ga.jspm.io/npm:es-module-shims@1.5.17/dist/es-module-shims.js` this can add significant slow down to the entire app loading if this resource becomes bottle necked
 
 [show the loading performance measurements]
+
+</details>
 
 ## 2) Integration Layer 
 
