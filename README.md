@@ -88,8 +88,8 @@ Measured by:
 
 | Property               | Native Federation     | Module Federation |
 | --------------------- | --------------------- | ----------------- |
-| Configurability | ❌ No support for share scope configuration. Smaller API. | ✅ Can configure shared deps at runtime. Broader API. |
-| Independence | ❌ No default support | ✅ Supports independent runtimes |
+| Configurability | No support for share scope configuration. Smaller API. | Can configure shared deps at runtime. Broader API. |
+| Independence | No default support | Supports independent runtimes |
 
 #### Configurability
 
@@ -111,7 +111,7 @@ Measured by:
 
 | Property               | Native Federation     | Module Federation |
 | --------------------- | --------------------- | ----------------- |
-| Initial load Performance | ❌ | ✅ |
+| Initial load Performance | | |
 | # Network calls | 19 | 11 |
 | # Render blocking resource | 1 | 0 |
 | LCP normal connection | 110ms | 50ms |
@@ -156,8 +156,8 @@ Dependency Resolution step is measured by the following Properties:
 
 | Property | Native Federation | Module Federation |
 |----------|------------------|-------------------|
-| Version Management | ✅ Import Maps | ✅ Semver ranges |
-| Sharing Strategy | ✅ Build-time configuration | ✅ Flexible sharing strategies |
+| Version Management | Import Maps | Semver ranges |
+| Sharing Strategy | Build-time configuration | Flexible sharing strategies |
 
 #### Version Management
 
@@ -180,8 +180,8 @@ Module Integration step is measured by the following Properties:
 
 | Property               | Native Federation     | Module Federation |
 | --------------------- | --------------------- | ----------------- |
-| Initialization Control | ❌ Standard ESM initialization | ✅ Container initialization API |
-| Scope Isolation | ❌ Basic ES Module scoping | ✅ Enhanced container isolation |
+| Initialization Control | Standard ESM initialization | Container initialization API |
+| Scope Isolation | Basic ES Module scoping | Enhanced container isolation |
 
 #### Initialization Control
 
@@ -234,9 +234,9 @@ Runtime Control step is measured by the following Properties:
 
 | Property               | Native Federation     | Module Federation |
 | --------------------- | --------------------- | ----------------- |
-| Module Loading | ❌ Limited control | ✅ Programmatic control |
-| Lifecycle Management | ❌ Basic ESM lifecycle | ✅ Full lifecycle control |
-| Module Graph Management | ✅ Basic support | ✅ Advanced control |
+| Module Loading | Limited control | Programmatic control |
+| Lifecycle Management | Basic ESM lifecycle | Full lifecycle control |
+| Module Graph Management | Basic support | Advanced control |
 
 #### Module Loading Property
 
@@ -257,10 +257,10 @@ Runtime Extension step is measured by the following Properties:
 
 | Property | Native Federation | Module Federation |
 |--|--|--|
-| Plugin Support | ❌ No plugin system | ✅ Extensible plugin system |
-| Security Controls | ❌ Manual implementation required | ✅ Plugin-based security framework |
-| Error Handling | ❌ Manual error handling | ✅ Built-in recovery mechanisms |
-| Monitoring Capabilities | ❌ Limited monitoring | ✅ Comprehensive monitoring |
+| Plugin Support | No plugin system | Extensible plugin system |
+| Security Controls | Manual implementation required | Plugin-based security framework |
+| Error Handling | Manual error handling | Built-in recovery mechanisms |
+| Monitoring Capabilities | Limited monitoring | Comprehensive monitoring |
 
 #### Plugin Support Property
 
