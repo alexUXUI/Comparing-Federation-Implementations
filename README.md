@@ -158,13 +158,18 @@ It consists of the following steps:
 
 Dependency Resolution step is measured by the following Properties:
 
-- **Version Management**: Dependency version handling
-- **Sharing Strategy**: Shared dependency handling
+- **Version Management**: How each federation approach resolves and manages dependency versions:
+  - Native Federation uses Import Maps for exact version matching (e.g., "react": "18.2.0")
+  - Module Federation supports flexible semver ranges (e.g., "react": "^18.2.0")
+
+- **Sharing Strategy**: How shared dependencies are managed at runtime:
+  - Native Federation configures sharing at build time through Import Maps with limited runtime flexibility
+  - Module Federation offers runtime share scope configuration with dynamic dependency registration
 
 | Property | Native Federation | Module Federation |
 |----------|------------------|-------------------|
-| Version Management | Import Maps | Semver ranges |
-| Sharing Strategy | Build-time configuration | Flexible sharing strategies |
+| Version Management | Import Maps with exact version matching | Container-based with semver range support |
+| Sharing Strategy | Static Import Maps configuration at build time | Dynamic share scope with runtime configuration |
 
 #### Version Management
 
