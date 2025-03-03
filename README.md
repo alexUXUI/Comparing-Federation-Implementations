@@ -50,6 +50,8 @@ Module Federation (MF) and Native Federation (NF) represent two distinct approac
 
 To provide a structured comparison, we will analyze both approaches using the Federation Conceptual Framework, evaluating their strengths and weaknesses within a standardized model.
 
+The ultimate goal is to determine the "Real World" impacts of choosing between MF and NF. As such, the Real World impact will be discussed in each layer, with a high-level summary in the Conclusion section.
+
 </details>
 
 ## Federation Conceptual Framework
