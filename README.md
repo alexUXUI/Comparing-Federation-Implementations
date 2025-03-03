@@ -12,31 +12,29 @@
     1. [Runtime Initialization Step](#1a-runtime-initialization-step)
         - Configurability
         - Independence
-        - Real World Impact
     2. [Code Resolution Step](#1b-code-resolution-step)
         - Initial Load Performance
-        - Real World Impact
+    3. [Resolution Layer Real World Impact](#resolution-layer-real-world-impact)
 4. [Integration Layer](#2-integration-layer)
     1. [Dependency Resolution Step](#2a-dependency-resolution-step)
         - Version Management
         - Sharing Strategy
-        - Real World Impact
     2. [Module Integration Step](#2b-module-integration-step)
         - Initialization Control
         - Scope Isolation
         - Error Handling
-        - Real World Impact
+    3. [Integration Layer Real World Impact](#integration-layer-real-world-impact)
 5. [Runtime Management Layer](#3-runtime-management-layer)
     1. [Runtime Control Step](#3a-runtime-control-step)
         - Module Loading
         - Lifecycle Management
         - Module Graph Management
-        - Real World Impact
     2. [Runtime Extension Step](#3b-runtime-extension-step)
         - Plugin Support
         - Error Handling
         - Real World Impact
         - Monitoring Capabilities
+    3. [Runtime Management Layer Real World Impact](#runtime-management-layer-real-world-impact)
 6. [Options Comparison](#options-comparison)
 7. [Conclusion](#conclusion)
 
@@ -135,7 +133,7 @@ Though part of this is due to the bundling differences between esbuild and rspac
 
 Native federation also has a render blocking resource, `https://ga.jspm.io/npm:es-module-shims@1.5.17/dist/es-module-shims.js` this can add significant slow down to the entire app loading if this resource becomes bottle necked
 
-#### Resolution Layer Real World Impacts
+#### Resolution Layer Real World Impact
 
 The technical differences in the Resolution Layer translate into significant business and development impacts:
 
@@ -148,8 +146,6 @@ The technical differences in the Resolution Layer translate into significant bus
      - Higher bounce rates in markets with poor connectivity
      - Limited reach in emerging markets due to performance constraints
      - Better suited for markets with robust infrastructure
-
-### 1.b) Code Resolution Step
 
 </details>
 
@@ -188,24 +184,6 @@ Native Federation provides a straightforward sharing strategy through the `share
 
 Module Federation offers similar capabilities through its container-based architecture, with additional configuration options for advanced sharing scenarios.
 
-#### Integration Layer Real World Impacts
-
-In real-world applications, the choice between Module Federation and Native Federation has significant implications for development teams and business outcomes:
-
-1. **Authentication and Session Management**
-   - Module Federation enables immediate user session validation with built-in singleton management, preventing unauthorized access and reducing authentication-related UI flickers
-   - Native Federation requires manual implementation of authentication singletons, leading to more complex session management and potential inconsistencies across micro-frontends
-
-2. **Feature Flag Systems**
-   - Module Federation's eager loading capability ensures feature flags are loaded and evaluated during bootstrap. preventing UI flickering, preventing UI flickering and enabling immediate feature decisions across all
-   - Share scope system enables consistent feature flag state across all micro-frontends
-   - Native Federation's ESM-based loading requires additional coordination  needs manual coordination of feature flag systems, potentially causing inconsistent feature rendering and increased development overhead
-
-3. **Global State Management**
-   - Module Federation's eager shared dependencies and container initialization ensure state is available immediately, reducing state synchronization issues
-   - Share scope system provides a unified state management layer across all micro-frontends
-   - Native Federation's basic ESM scoping requires manual state synchronization, requires additional effort to maintain state consistency, often leading to more complex state management implementations
-
 ### 2.b) Module Integration Step
 
 Module Integration step is measured by the following attributes:
@@ -231,6 +209,24 @@ Module Federation provides enhanced container isolation through its container-ba
 #### Error Handling Attribute
 
 Module Federation's container abstraction provides built-in error handling for module loading and dependency conflicts, while Native Federation's integration with standard ES modules means error handling must be managed manually.
+
+### Integration Layer Real World Impact
+
+The Integration Layer capabilities translate into significant implications for development teams and business outcomes:
+
+1. **Authentication and Session Management**
+   - Module Federation enables immediate user session validation with built-in singleton management, preventing unauthorized access and reducing authentication-related UI flickers
+   - Native Federation requires manual implementation of authentication singletons, leading to more complex session management and potential inconsistencies across micro-frontends
+
+2. **Feature Flag Systems**
+   - Module Federation's eager loading capability ensures feature flags are loaded and evaluated during bootstrap, preventing UI flickering and enabling immediate feature decisions
+   - Share scope system enables consistent feature flag state across all micro-frontends
+   - Native Federation's ESM-based loading requires additional coordination of feature flag systems, potentially causing inconsistent feature rendering and increased development overhead
+
+3. **Global State Management**
+   - Module Federation's eager shared dependencies and container initialization ensure state is available immediately, reducing state synchronization issues
+   - Share scope system provides a unified state management layer across all micro-frontends
+   - Native Federation's basic ESM scoping requires manual state synchronization, requiring additional effort to maintain state consistency
 
 </details>
 
@@ -309,28 +305,25 @@ Native Federation's integration with standard ES modules means error handling mu
 
 Module Federation provides comprehensive logging and monitoring hooks for tracking:
 
-#### Runtime Management Layer Real World Impacts
+### Runtime Management Layer Real World Impact
 
 The technical capabilities of the Runtime Management Layer translate into significant business and operational impacts:
 
 1. **Access Control and Security**
-
-- Lower development costs for implementing security controls
-- Higher likelihood of license compliance through automated enforcement
-- Reduced risk of unauthorized module access
-- Simplified audit trails for security compliance
+   - Lower development costs for implementing security controls
+   - Higher likelihood of license compliance through automated enforcement
+   - Reduced risk of unauthorized module access
+   - Simplified audit trails for security compliance
 
 2. **Error Handling**
-
-- Lower development costs for implementing error recovery mechanisms
-- Higher likelihood of graceful error handling
-- Reduced risk of system downtime due to errors
-- Simplified error recovery mechanisms
+   - Lower development costs for implementing error recovery mechanisms
+   - Higher likelihood of graceful error handling
+   - Reduced risk of system downtime due to errors
+   - Simplified error recovery mechanisms
 
 3. **Monitoring Capabilities**
-
-- Increased visibility for module usage patterns, leading to more insights on composition patterns
-- Lower effort to debug and troubleshoot issues
+   - Increased visibility for module usage patterns, leading to more insights on composition patterns
+   - Lower effort to debug and troubleshoot issues
 
 </details>
 
