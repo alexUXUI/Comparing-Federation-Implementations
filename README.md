@@ -422,9 +422,10 @@ Below is a summary table, showing the tables from the previous sections.
 
 <details>
 
-<summary>Further Considerations</summary>
 
 ## Further Considerations
+
+<summary>Further Considerations</summary>
 
 In addition to the technical aspects above, there are some other important things to consider when choosing these technologies. First, Module Federation is the clear thought leader in the space. Second, Module Federation comes with greater support for developer productivity in the form of: documentation, tooling, and large community.
 
