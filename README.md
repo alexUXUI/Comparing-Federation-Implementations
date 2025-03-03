@@ -132,7 +132,7 @@ Native Federation requires more network requests, impacting performance on poor 
 
 ### Resolution Layer Real-World Impact
 
-The technical differences in the Resolution Layer translate into business  impacts including:
+The technical differences in the Resolution Layer translate into business impacts including:
 
 - **Module Federation**: Lower bounce rates, better conversion, improved performance on low-end devices.
 - **Native Federation**: Higher bounce rates, limited reach in emerging markets, best suited for robust infrastructure.
@@ -337,11 +337,11 @@ Module Federation and Native Federation represent quite similar mental models, b
 
 | Federation Layer | Native Federation | Module Federation |
 | ---------------- | ----------------- | ----------------- |
-| Resolution | • Uses browser-native Import Maps<br>• More network requests (19 vs 11)<br>• Has render-blocking resources<br>• Slower LCP across network conditions | • Container-based virtual module system<br>• Fewer network requests<br>• No render-blocking resources<br>• Better LCP performance<br>• Runtime share scope configuration |
-| Integration | • Exact version matching<br>• Basic ES Module scoping<br>• Standard ESM initialization<br>• Manual error handling<br>• Common dependency sharing | • Semver range support<br>• Enhanced container isolation<br>• Container initialization API<br>• Built-in error handling<br>• Configurable sharing strategies |
-| Management | • Manual module loading control<br>• Basic ESM lifecycle<br>• No plugin system<br>• Limited monitoring capabilities<br>• Manual error handling | • Programmatic module loading with support for preloading<br>• Full lifecycle control<br>• Extensible plugin system<br>• Lifecycle based monitoring<br>• Built-in recovery mechanisms |
+| Resolution | - Uses browser-native Import Maps<br>- More network requests (19 vs 11)<br>- Has render-blocking resources<br>- Slower LCP across network conditions | - Container-based virtual module system<br>- Fewer network requests<br>- No render-blocking resources<br>- Better LCP performance<br>- Runtime share scope configuration |
+| Integration | - **User Experience**: Immediate session validation and feature flag evaluation prevents UI flickering<br>- **Market Reach**: Smart dependency sharing reduces bundle sizes, improving load times in low-bandwidth markets<br>- **Reliability**: Built-in error handling and recovery mechanisms reduce service disruptions<br>- **Feature Consistency**: Share scope system ensures consistent feature flags and state across micro-frontends | - **Initial Simplicity**: Standard ES modules provide familiar user experience<br>- **Market Limitations**: Bundle duplication and strict version requirements impact performance in low-bandwidth scenarios<br>- **Service Reliability**: Manual error handling increases risk of service disruptions<br>- **Feature Challenges**: Basic ES Module scoping requires additional effort for consistent feature management |
+| Management | - Manual module loading control<br>- Basic ESM lifecycle<br>- No plugin system<br>- Limited monitoring capabilities<br>- Manual error handling | - Programmatic module loading with support for preloading<br>- Full lifecycle control<br>- Extensible plugin system<br>- Lifecycle based monitoring<br>- Built-in recovery mechanisms |
 
-</details>
+</details> 
 
 ## Conclusion
 
@@ -354,8 +354,8 @@ Based on our analysis across the three layers of federation, here are the real-w
 | Layer | Module Federation | Native Federation |
 | ----- | ---------------- | ----------------- |
 | Resolution | - Reduced bounce rates and higher conversion rates due to faster initial page loads<br>- Larger market support for markets with slower networks and devices<br> - Overall faster LCP<br> - Independent runtime support is scalable | - Higher bounce rates and lower conversion rates due to faster initial page loads<br> - Potential performance bottlenecks in high-latency scenarios. Less market support.<br> - Overall slower LCP <br> - Additional coordination overhead as system grows due to no nested runtime support |
-| Integration | - **Team Autonomy**: Independent version updates without system-wide coordination<br>- **Maintenance**: Lower long-term maintenance costs through smart dependency sharing<br>- **Performance**: Reduced CDN costs and better caching through optimized bundles<br>- **Learning Curve**: Higher initial training investment for development teams | - **Team Onboarding**: Faster developer ramp-up with simpler concepts<br>- **Development Speed**: Quicker iterations for smaller teams<br>- **Technical Debt**: Potential future refactoring needs due to version constraints<br>- **Resource Usage**: Higher storage and bandwidth costs from bundle duplication |
-| Management | - **Customization**: Lower development costs for custom features through plugins<br>- **Scalability**: Better support for large, distributed development teams<br>- **Control**: Finer-grained performance optimization capabilities<br>- **Staffing**: Requires senior developers with federation expertise | - **Operational Cost**: Lower operational overhead for small to medium projects<br>- **Team Structure**: Suitable for smaller, centralized teams<br>- **Future-Proofing**: May require significant refactoring for advanced features<br>- **Resource Allocation**: More predictable resource planning |
+| Integration | - Immediate user session validation and feature flag evaluation prevents UI flickering<br>- Smart dependency sharing reduces bundle sizes, improving load times in low-bandwidth markets<br>- Built-in error handling and recovery mechanisms reduce service disruptions<br>- Share scope system ensures consistent feature flags and state across micro-frontends | - Standard ES modules provide familiar user experience<br>- Bundle duplication and strict version requirements impact performance in low-bandwidth scenarios<br>- Manual error handling increases risk of service disruptions<br>- Basic ES Module scoping requires additional effort for consistent feature management |
+| Management | - Automated license enforcement and access controls reduce security incidents<br>- Built-in monitoring provides faster issue detection and resolution<br>- Plugin system enables rapid feature deployment and customization<br>- Comprehensive error recovery reduces service downtime | - Manual security implementation increases vulnerability risks<br>- Limited monitoring capabilities extend time to detect and resolve issues<br>- Basic runtime controls restrict feature deployment flexibility<br>- Manual error handling leads to longer service recovery times |
 
 This comparison demonstrates that Module Federation offers more flexibility and power at the cost of complexity, while Native Federation provides a simpler approach with some limitations. The choice between them should be based on specific project requirements, team expertise, and business needs.
 
