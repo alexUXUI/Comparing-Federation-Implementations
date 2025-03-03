@@ -88,8 +88,8 @@ Measured by:
 
 | Property               | Native Federation     | Module Federation |
 | --------------------- | --------------------- | ----------------- |
-| Configurability | ❌ No support for runtime share scope configuration. Smaller API. | ✅ can configure shared deps at runtime. Broader API. |
-| Independence | ❌ No support for independent runtimes (by default) | ✅ supports independent runtimes |
+| Configurability | ❌ No support for share scope configuration. Smaller API. | ✅ Can configure shared deps at runtime. Broader API. |
+| Independence | ❌ No default support | ✅ Supports independent runtimes |
 
 #### Configurability
 
