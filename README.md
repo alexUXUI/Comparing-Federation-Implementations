@@ -128,7 +128,7 @@ Measured by:
 > The data was gathered using Chrome Developer tools performance panel, custom performance timings, and lighthouse.
 > Network cache was disabled to ensure initial load conditions were not cached. For more please see [measurements](./performance-measurements/)
 
-#### Initial Load Performance Property
+#### Initial Load Performance
 
 Native Federation requires more network requests, impacting performance on poor connections. A render-blocking resource (`es-module-shims.js`) further slows app loading if bottle-necked.
 
@@ -245,11 +245,11 @@ Runtime Control step is measured by the following Properties:
 | Lifecycle Management | Basic ESM lifecycle | Full lifecycle control |
 | Module Graph Management | Basic support | Advanced control |
 
-#### Module Loading Property
+#### Module Loading
 
 Module Federation provides programmatic control over module loading through its container API, allowing fine-grained control over how and when modules are loaded. Native Federation relies on the browser's built-in module loading system, offering less control.
 
-#### Lifecycle Management Property
+#### Lifecycle Management
 
 Module Federation enables full control over module initialization and cleanup through its container architecture. Native Federation uses standard ESM lifecycle management with limited control options.
 
@@ -269,11 +269,11 @@ Runtime Extension step is measured by the following Properties:
 | Error Handling | Manual error handling | Built-in recovery mechanisms |
 | Monitoring Capabilities | Limited monitoring | Comprehensive monitoring |
 
-#### Plugin Support Property
+#### Plugin Support
 
 Module Federation's runtime is extensible through a plugin system that enables. Native Federation's integration with standard ES modules means error handling must be managed manually.
 
-#### Security Controls Property
+#### Security Controls
 
 Module Federation's plugin architecture significantly reduces the effort required to implement:
 
@@ -282,7 +282,7 @@ Module Federation's plugin architecture significantly reduces the effort require
 - **Usage Tracking**: Automated monitoring of module consumption for license compliance
 - **Security Policies**: Centralized implementation of security rules across all federated modules
 
-#### Error Handling Property
+#### Error Handling
 
 Module Federation's runtime provides built-in error recovery mechanisms for:
 
@@ -291,7 +291,7 @@ Module Federation's runtime provides built-in error recovery mechanisms for:
 
 Native Federation's integration with standard ES modules means error handling must be managed manually.
 
-#### Monitoring Capabilities Property
+#### Monitoring Capabilities
 
 Module Federation provides comprehensive logging and monitoring hooks for tracking:
 
