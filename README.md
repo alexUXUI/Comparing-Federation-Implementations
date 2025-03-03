@@ -398,6 +398,22 @@ Both Module Federation and Native Federation implementations continue to evolve,
 
 While there is no one-size-fits-all solution, Module Federation's container-based architecture and plugin system provide a flexible and extensible runtime management system, while Native Federation's integration with standard ES modules provides a familiar and familiar user experience. For performance and extensibility Module Federation is preferred. For quite simple projects, and adherence to standards, Native Federation is preferred.
 
+## Comprehensive Comparison Across all Layers
+
+Below is a summary table, showing the tables from the previous sections.
+
+| Layer | Aspect | Module Federation | Native Federation |
+|-------|---------|-------------------|------------------|
+| **Resolution Layer** |||||
+| | Runtime Initialization | - Configurable share scope<br>- Runtime dependency injection<br>- Flexible initialization options | - Fixed import map configuration<br>- Static dependency declaration<br>- Limited runtime configuration |
+| | Code Resolution | - Reduced bounce rates<br>- Faster initial page loads<br>- Better market support for slow networks<br>- Overall faster LCP | - Higher bounce rates<br>- Slower initial page loads<br>- Limited support for slow networks<br>- Overall slower LCP |
+| **Integration Layer** |||||
+| | Dependency Resolution | - Independent version updates<br>- Lower maintenance costs<br>- Reduced CDN costs<br>- Better caching through optimization | - Requires coordinated updates<br>- Higher maintenance overhead<br>- Higher storage costs<br>- Limited caching optimization |
+| | Module Integration | - Team autonomy in deployments<br>- Smart dependency sharing<br>- Optimized bundle management<br>- Advanced error handling | - Simpler team onboarding<br>- Quick iterations for small teams<br>- Bundle duplication issues<br>- Basic error handling |
+| **Management Layer** |||||
+| | Runtime Control | - Fine-grained loading control<br>- Advanced lifecycle management<br>- Flexible module graph control | - Basic loading mechanisms<br>- Limited lifecycle control<br>- Static module relationships |
+| | Runtime Extension | - Rich plugin ecosystem<br>- Custom feature development<br>- Scalable team workflows<br>- Senior developer focus | - Limited extensibility<br>- Basic feature set<br>- Suitable for smaller teams<br>- Junior developer friendly |
+
 <details>
 
 <summary>Further Considerations</summary>
