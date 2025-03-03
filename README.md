@@ -2,6 +2,10 @@
 
 ## Table of Contents
 
+<details>
+
+<summary>Content</summary>
+
 1. [Introduction](#introduction)
 2. [Federation Conceptual Framework](#federation-conceptual-framework)
 3. [Resolution Layer](#1-resolution-layer)
@@ -29,6 +33,8 @@
         - Monitoring Capabilities
 6. [Options Comparison](#options-comparison)
 7. [Conclusion](#conclusion)
+
+</details>
 
 ## Introduction
 
