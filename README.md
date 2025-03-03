@@ -179,9 +179,41 @@ Module Federation uses a container-based architecture that enables flexible vers
 
 #### Sharing Strategy
 
-Native Federation provides a straightforward sharing strategy through the `shareAll` helper with configurable options: `singleton`, `strictVersion`, `requiredVersion`, `includeSecondaries`, and `skip`
+Native Federation provides a straightforward sharing strategy through the `shareAll` helper with configurable options: `singleton`, `strictVersion`, `requiredVersion`, `includeSecondaries`, and `skip`. It uses a single global scope through the browser's module system, with share scope configuration determined at build time.
 
-Module Federation offers similar capabilities through its container-based architecture, with additional configuration options for advanced sharing scenarios.
+Module Federation offers multiple share scopes with granular control over dependency visibility through its container-based architecture. Share scopes in Module Federation are a powerful concept that provides:
+
+1. **Runtime Configuration**
+   - Dynamic registration of shared dependencies
+   - Ability to modify share scope configuration after initialization
+   - Support for multiple independent share scopes
+
+2. **State Management**
+   - Scope-specific state isolation
+   - Singleton management across micro-frontends
+   - Versioned state containers
+
+3. **Dependency Isolation**
+   - Separate share scopes for different parts of the application
+   - Version conflict resolution within each scope
+   - Independent upgrade paths for shared dependencies
+
+Native Federation, in contrast, relies on the browser's global module system, which means:
+
+1. **Single Global Scope**
+   - All shared dependencies exist in one global namespace
+   - No built-in support for multiple share scopes
+   - Share scope configuration is determined at build time
+
+2. **Limited State Management**
+   - Manual implementation required for state isolation
+   - No built-in singleton management
+   - Global state must be managed through custom solutions
+
+This difference in sharing strategy has significant implications:
+
+- Module Federation enables independent micro-frontends with isolated dependencies, A/B testing different versions of shared libraries, and gradual migration strategies
+- Native Federation's global scope provides simpler setup but requires careful coordination between teams and has limited options for dependency isolation
 
 ### 2.b) Module Integration Step
 
